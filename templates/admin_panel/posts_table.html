@@ -1,0 +1,61 @@
+{% extends 'admin_panel/base.html' %}
+{% load static %}
+{% block content %}
+<!-- Main content -->
+<section class="content">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Blog Posts</h3>
+          <a href="/pro/write-post"><button type="button" class="btn btn-block btn-success btn-flat new-post">+ New Post</button></a>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+          <table id="example1" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+              <th style="width:40%">Title</th>
+              <th style="width:20%">Last Updated</th>
+              <th style="width:20%">Published</th>
+              <th style="width:20%">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for post in posts %}
+            <tr>
+              <td><a href="{{ base_url }}/tutorial/{{ post.slug }}" target="_blank">{{ post.title }} <i class="fas fa-external-link-alt"></i> </a></td>
+              <td>{{ post.updated }}</td>
+              <td>
+                <label class="switch">
+                  <input type="checkbox" onchange="change_publish_status({{ post.id }});" {% if post.published == True %}checked{% else %}{% endif %}>
+                  <span class="slider round"></span>
+                </label>
+             </td>
+              <td>
+                <a href="/pro/update-post/{{ post.id }}"><button class="btn btn-primary">Edit</button></a>
+                <a href="/pro/delete-post/{{ post.id }}" onclick="return confirm('Are you sure to delete?')"><button class="btn btn-danger">Delete</button></a>
+              </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+            <tr>
+              <th style="width:40%">Title</th>
+              <th style="width:20%">Last Updated</th>
+              <th style="width:20%">Published</th>
+              <th style="width:20%">Action</th>
+            </tr>
+            </tfoot>
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+    </div>
+    <!-- /.col -->
+  </div>
+  <!-- /.row -->
+</section>
+<!-- /.content -->
+{% endblock %}

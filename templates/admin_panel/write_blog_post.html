@@ -1,0 +1,102 @@
+{% extends 'admin_panel/base.html' %}
+{% load static %}
+{% block content %}
+
+	    <!-- Main content -->
+    <section class="content">
+    <form id="new-post-form" action="/pro/save-new-post" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="row">
+        <div class="col-md-12">
+    	         <div class="card card-outline card-info">
+            <div class="card-header">
+            	<h3>Post Meta</h3>
+              <!-- tools box -->
+              <div class="card-tools">
+              		<button type="button" class="btn btn-tool btn-sm" data-card-widget="collapse" data-toggle="tooltip"
+                        title="Collapse">
+                  <i class="fas fa-minus"></i></button>
+              </div>
+              <!-- /. tools -->
+            </div>
+
+            <!-- /.card-header -->
+
+            <div class="card-body pad">
+      			<div class="form-group">
+	                <label>Title</label>
+	                <textarea name="title" class="form-control title" rows="1" placeholder="Title for post" style="height: auto; padding: 10px;"></textarea>
+                  <span class="error-msg title-error"></span>
+          	</div>
+      			<div class="form-group">
+	                <label>Slug</label>
+	                <input type="text" name="slug" class="form-control slug" rows="1" placeholder="e.g. your-title-here" style="height: auto; padding: 10px;" />
+                  <span class="error-msg slug-error"></span>
+                  <span class="slug-exists"></span>
+          	</div>
+       			<div class="form-group">
+  	                <label>Meta Description</label>
+  	                <textarea class="form-control meta-desc" name="meta-desc" rows="3" placeholder="Enter meta description for post" style="height: 69px; padding: 10px;"></textarea>
+                    <span class="error-msg meta-desc-error"></span>
+                	</div>
+       			<div class="form-group">
+  	                <label>Meta Keywords</label>
+  	                <textarea class="form-control meta-keywords" name="meta-keywords" rows="3" placeholder="Enter meta keywords for post" style="height: 69px; padding: 10px;"></textarea>
+                    <span class="error-msg meta-keywords-error"></span>
+          	</div>
+                <div class="form-group">
+                  <label>Post Tags</label>
+                  <div class="select2-purple">
+                    <select class="tags-select2 tags" name="tags[]" id="tags-select2" style="width: 100%;">
+                    </select>
+                  </div>
+                  <span class="error-msg tags-error"></span>
+                </div>
+                <div class="form-group">
+                   <label>Post Thumbnail</label>
+                   <input type="file" name="thumbnail" class="dropify post-thumbnail" data-default-file=""  />
+                   <span class="error-msg post-thumbnail-error"></span>
+                </div>
+            </div>
+          </div>
+          <!-- <div class="card card-outline card-info"> -->
+            <!-- /.card-header -->
+            <!-- <div class="card-body pad"> -->
+              <div class="mb-3">
+                <!-- <textarea name="post" class="postarea" id="postarea" placeholder="Place some text here"
+                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea> -->
+                {{ form.media }}
+                {{ form.as_p  }}
+              </div>
+              <button type="submit" class="btn btn-block btn-success btn-flat new-post">Save</button>
+            <!-- </div> -->
+          <!-- </div> -->
+        </div>
+        <!-- /.col-->
+      </div>
+      <!-- ./row -->
+    </form>
+      <div class="row form-error">
+    </div>
+    </section>
+    <!-- /.content -->
+
+  <script>
+	tinymce.init({
+	  selector: '#postarea',
+	  height: 500,
+	  theme: 'modern',
+	  plugins: 'print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help',
+	  toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
+	  image_advtab: true,
+	  templates: [
+	    { title: 'Test template 1', content: 'Test 1' },
+	    { title: 'Test template 2', content: 'Test 2' }
+	  ],
+	  content_css: [
+	    '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+	    '//www.tinymce.com/css/codepen.min.css'
+	  ]
+	 });
+  </script>
+{% endblock %}

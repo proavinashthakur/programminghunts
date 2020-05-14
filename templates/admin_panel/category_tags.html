@@ -1,0 +1,232 @@
+{% extends 'admin_panel/base.html' %}
+{% load static %}
+{% block content %}
+<!-- Main content -->
+<section class="content">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Categories and Tags {{ site }}</h3>
+          <a><button type="button" class="btn btn-block btn-success btn-flat new-post" data-toggle="modal" data-target="#add-tag">+ Tag</button></a>
+
+           <a><button type="button" class="btn btn-block btn-success btn-flat new-post" data-toggle="modal" data-target="#add-category">+ Category</button></a>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+          <div class="container-fluid">
+          {% for category in categories_tags %}
+          Feature this Category
+          <label class="switch">
+              <input type="checkbox" onchange="change_featured_category({{ category.id }});" 
+              {% if category.featured == True %}checked{% else %}{% endif %}>
+              <span class="slider round"></span>
+          </label>
+          <a onclick="get_category_data({{ category.id }});"><u><h5 class="mb-2 custom-pointer">{{ category.title }} - {{ category.tag_length }}</h5></u></a>
+          <div class="row">
+            {% if category.tags %}
+              {% for tag in category.tags %}
+                <div class="col-md-3 col-sm-6 col-12">
+                  <a onclick="get_tag_data({{ tag.id }});">
+                  <div class="info-box">
+                    <span class="info-box-icon bg-info">{% if tag.thumbnail %}<img src="{{ base_url }}/media/{{tag.thumbnail}}">{% else %}<i class="fab fa-slack-hash"></i>{% endif %} </span>
+                    
+                      <div class="info-box-content">
+                        <span class="info-box-text">{{ tag.title}}</span>
+                        <span class="info-box-number">{{ tag.id }}</span>
+                      </div>
+                  
+                    <!-- /.info-box-content -->
+                  </div>
+                  <!-- /.info-box -->
+                  </a>
+                </div>
+                <!-- /.col -->
+            
+              {% endfor %}
+            {% endif %}            
+          </div>
+          <hr>
+          {% endfor %}
+
+        </div>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+    </div>
+    <!-- /.col -->
+  </div>
+  <!-- /.row -->
+</section>
+<!-- /.content -->
+
+
+ <div class="modal fade" id="add-category">
+    <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add New Category</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              </button>
+            </div>
+            <div class="modal-body">
+                <form action="/pro/add-category" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                  <div class="card-body">
+                    <div class="form-group">
+                      <label>Title</label>
+                      <input type="text" class="form-control"  name="title" placeholder="Enter category title" value="" required>
+                    </div>
+                    <div class="form-group">
+                       <label>Post Thumbnail</label>
+                       <input name="thumbnail" type="file" class="dropify" data-default-file=""  />
+                    </div>
+
+                  </div>
+                  <!-- /.card-body -->
+                  <div class="modal-footer justify-content-between">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-success" >Save</button>
+                  </div>
+                </form>
+          </div>
+
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+
+ <div class="modal fade" id="add-tag">
+    <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add New Tag</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              </button>
+            </div>
+            <div class="modal-body">
+                <form action="/pro/add-tag" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                  <div class="card-body">
+                    <div class="form-group">
+                       <label>Category</label>
+                       <select class="form-control" name="category" placeholder="Select tag category" required>
+                        <option disabled selected>Select tag category</option>
+                        {% for category in categories %}
+
+                         <option value="{{ category.id }}">{{ category.title }}</option>
+                         {% endfor %}
+                        }
+                       </select>
+                    </div>
+                    <div class="form-group">
+                      <label>Title</label>
+                      <input type="text" class="form-control" id="title" name="title" placeholder="Enter tag title" value="" required>
+                    </div>
+                    <div class="form-group">
+                       <label>Tag Thumbnail</label>
+                       <input name="thumbnail" id="thumbnail" type="file" class="dropify" data-default-file=""  />
+                    </div>
+
+                  </div>
+                  <!-- /.card-body -->
+                  <div class="modal-footer justify-content-between">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-success" >Save</button>
+                  </div>
+                </form>
+          </div>
+
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+
+
+<!-- *** edit modals *** -->
+
+
+ <div class="modal fade" id="update-category">
+    <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Update Category</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              </button>
+            </div>
+            <div class="modal-body">
+                <form action="/pro/update-category" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                  <div class="card-body">
+                    <div class="form-group">
+                      <input class="cat_id" type="hidden" class="form-control" id="cat_id" name="cat_id"  value="">
+                      <label for="title">Title</label>
+                      <input class="title" type="text" class="form-control" id="title" name="title" placeholder="Enter category title" value="" required>
+                    </div>
+                    <div class="form-group">
+                       <label>Post Thumbnail</label>
+                       <input class="thumbnail" id="thumbnail" name="thumbnail" type="file" class="dropify" data-default-file=""  />
+                    </div>
+
+                  </div>
+                  <!-- /.card-body -->
+                  <div class="modal-footer justify-content-between">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <a type="button" class="btn btn-danger delete-category" >Delete</a>          
+                      <button type="submit" class="btn btn-success" >Save</button>
+                  </div>
+                </form>
+          </div>
+
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+
+
+ <div class="modal fade" id="update-tag">
+    <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit Tag</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              </button>
+            </div>
+            <div class="modal-body">
+                <form action="/pro/update-tag" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                  <div class="card-body">
+                    <input class="tag_id" type="hidden" class="form-control" id="tag_id" name="tag_id"  value="">
+                    <div class="form-group">
+                      <label>Title</label>
+                      <input type="text" class="form-control tag-title" id="title" name="title" placeholder="Enter tag title" value="" required>
+                    </div>
+                    <div class="form-group">
+                       <label>Tag Thumbnail</label>
+                       <input name="tag-thumbnail" type="file" class="dropify" data-default-file=""  />
+                    </div>
+
+                  </div>
+                  <!-- /.card-body -->
+                  <div class="modal-footer justify-content-between">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <a type="button" class="btn btn-danger delete-tag" >Delete</a>
+                      <button type="submit" class="btn btn-success" >Save</button>
+                  </div>
+                </form>
+          </div>
+
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+{% endblock %}

@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="icon" href="{% static 'images/ph.png' %}">
+<title>{{ post.title }}</title>
+<meta name="description" content="{{ post.meta_desc }}" />
+<meta name="keywords" content="{{ post.meta_keywords }}" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i" rel="stylesheet">
+<link href="{% static 'css/theme.css' %}" rel="stylesheet">
+<!-- Begin tracking codes here, including ShareThis/Analytics -->
+    
+<!-- End tracking codes here, including ShareThis/Analytics -->
+
+<!—- ShareThis BEGIN -—>
+<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5e96992ea034e50012b52e5c&product=sticky-share-buttons&cms=sop' async='async'></script>
+<!—- ShareThis END -—>
+
+</head>
+<body class="layout-page">
+{% include 'blog/header.html' %}
+<div class="site-content">
+	<div class="container">
+		<!-- Content
+    ================================================== -->
+		<div class="main-content">
+			<!-- Begin Article
+            ================================================== -->
+			<div class="row">
+				{% include 'blog/sidebar.html' %}
+				{% block content %}
+
+				{% endblock %}
+
+			</div>
+			<!-- End Article
+            ================================================== -->
+		</div>
+	</div>
+	<!-- /.container -->
+	<!-- Before Footer
+    ================================================== -->
+	<div class="beforefooter">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-8">
+					<h3>This is your final call to action area. Shine like a star, make them want you, tell 'em to push that button!</h3>
+					<p>
+						 We offer a <span>30 Day Money Back Guarantee</span>, so joining is Risk-Free!
+					</p>
+					<a class="btn btn-primary btn-lg" href="#">Join us yesterday</a>
+				</div>
+				<div class="col-md-4 text-right footersocial">
+					<h5>Connect with Us</h5>
+					<i class="fa fa-facebook"></i>
+					<i class="fa fa-twitter"></i>
+					<i class="fa fa-google"></i>
+					<i class="fa fa-pinterest"></i>
+					<i class="fa fa-github"></i>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Begin Footer
+    ================================================== -->
+	<footer class="footer">
+		{% include 'blog/footer.html' %}
+	</footer>
+	<!-- End Footer
+    ================================================== -->
+</div>
+<!-- JavaScript
+================================================== -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<!-- <script type="text/javascript">
+	$(document).ready(function() {
+    // $('html, body').animate({
+    //     scrollTop: $(".posttitle").offset().top
+	   //  }, 1500);
+    var mydev = document.getElementById("mainheading");
+    alert(mydev.offsetTop)
+	});
+</script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
+<script src="{% static 'js/masonry.pkgd.min.js' %}"></script>
+<script src="{% static 'js/theme.js' %}"></script>
+</body>
+</html>

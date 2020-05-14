@@ -1,0 +1,51 @@
+{% load static %}
+<div class="col-sm-4">
+	<div class="sidebar" style="position: -webkit-sticky; position: sticky; top: 0;">
+		<div class="sidebar-section">
+			<div class="sidebar-section">
+			<h5><span>Recommended</span></h5>
+			<a href="https://easydigitaldownloads.com/?ref=2135" title="Sell digital downloads with WordPress, for free"><img src="https://easydigitaldownloads.com/wp-content/uploads/2015/02/300x250-2.png" alt="Sell digital downloads with WordPress, for free"/></a>
+		</div>
+			<h5><span>Newsletter</span></h5>
+
+			<div id="mc_embed_signup">
+				<form action="/subscriber-api" id="subscribe-form" method="post" name="subscribe-form">
+					<div id="mc_embed_signup_scroll">
+						<h2>Subscribe to our mailing list to receive updates from the blog</h2>
+						<span class="subscribe-msg"></span>
+							{% csrf_token %}
+							<input type="text" value="" name="f_name"  class="required" style="display: inline; width: 49%; margin-bottom: 7px;" placeholder="First name" required /> 
+
+							<input type="text" value="" name="l_name"  style="display: inline; width: 49%; margin-bottom: 7px;" placeholder="Last name">
+
+							<div class="mc-field-group">
+								<input type="email" value="" name="email" class="required email" id="mce-EMAIL" placeholder="E-mail Address" required>
+							</div>
+
+							<div id="mce-responses" class="clear">
+								<div class="response" id="mce-error-response" style="display:none">
+								</div>
+							</div>
+							<div class="clear">
+								<input type="submit" value="Subscribe" name="subscribe" class="button">
+							</div>
+					</div>
+				</form>
+			</div>
+			<script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[3]='MMERGE3';ftypes[3]='text';fnames[1]='MMERGE1';ftypes[1]='text';fnames[2]='MMERGE2';ftypes[2]='text';fnames[4]='MMERGE4';ftypes[4]='text';fnames[5]='MMERGE5';ftypes[5]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+			<!--End mc_embed_signup-->
+		</div>
+		<div class="sidebar-section">
+			<h5><span>Useful</span></h5>
+			<ul style="list-none;">
+				{% for category in categories %}
+					<li><a href="{{ base_url }}/category/{{ category.slug }}">{{ category.title }}</a></li>
+				{% endfor %}
+				{% if not categories %}
+				<h6 align="center">No featured categories</h6>
+				{% endif %}
+			</ul>
+		</div>
+		
+	</div>
+</div>
