@@ -44,7 +44,7 @@ def subscribe(request):
 
 			ip = request.META.get('REMOTE_ADDR', None)
 			g = GeoIP2()
-			city = g.city('2409:4056:18a:6b0b:2cfd:ea8d:8a3b:16ac')
+			city = g.city(ip)
 			subscriber = Subscribers.objects.create(first_name=first_name, last_name=last_name,
 				email=email, ip=ip, city=city['city'], country=city['country_name'], otp=otp)
 			msg_html = render_to_string('subscriber/verification_template.html', {'first_name': first_name, 'action_url':settings.BASE_URL+'/activate/'+otp})

@@ -13,11 +13,11 @@ def index(request):
         g = GeoIP2()
         ip = request.META.get('REMOTE_ADDR', None)
         if ip:
-            city = g.city('2409:4056:18a:6b0b:2cfd:ea8d:8a3b:16ac')
+            city = g.city(ip)
         g = GeoIP2()
         ip = request.META.get('REMOTE_ADDR', None)
         if ip:
-            city = g.city('2409:4056:18a:6b0b:2cfd:ea8d:8a3b:16ac')
+            city = g.city(ip)
         Visitor.objects.create(ip=ip, city=city['city'], country=city['country_name'], url=request.path)
     except:
         pass
@@ -30,11 +30,11 @@ def single(request, slug):
         g = GeoIP2()
         ip = request.META.get('REMOTE_ADDR', None)
         if ip:
-            city = g.city('2409:4056:18a:6b0b:2cfd:ea8d:8a3b:16ac')
+            city = g.city(ip)
         g = GeoIP2()
         ip = request.META.get('REMOTE_ADDR', None)
         if ip:
-            city = g.city('2409:4056:18a:6b0b:2cfd:ea8d:8a3b:16ac')
+            city = g.city(ip)
         Visitor.objects.create(ip=ip, city=city['city'], country=city['country_name'], url=request.path)
     except:
         pass
@@ -51,11 +51,11 @@ def category_wise_posts(request, slug):
         g = GeoIP2()
         ip = request.META.get('REMOTE_ADDR', None)
         if ip:
-            city = g.city('2409:4056:18a:6b0b:2cfd:ea8d:8a3b:16ac')
+            city = g.city(ip)
         g = GeoIP2()
         ip = request.META.get('REMOTE_ADDR', None)
         if ip:
-            city = g.city('2409:4056:18a:6b0b:2cfd:ea8d:8a3b:16ac')
+            city = g.city(ip)
         Visitor.objects.create(ip=ip, city=city['city'], country=city['country_name'], url=request.path)
     except:
         pass
