@@ -30,6 +30,8 @@ class Posts(models.Model):
 	slug = models.SlugField(max_length = 250, null = True, blank = True)
 	updated = models.DateTimeField(auto_now = True)
 	created = models.DateTimeField(auto_now_add=True)
+	nxt = models.IntegerField(null=True)
+	prev = models.IntegerField(null=True)
 	published = models.BooleanField(default=False) 
 
 	def get_absolute_url(self):

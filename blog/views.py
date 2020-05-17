@@ -21,9 +21,10 @@ def index(request):
         Visitor.objects.create(ip=ip, city=city['city'], country=city['country_name'], url=request.path)
     except:
         pass
-    posts = Posts.objects.filter(published=True).order_by('-created')[:4]
+    posts = Posts.objects.filter(published=True).order_by('-updated')[:4]
     categories = Category.objects.filter(featured=True)
-    return render(request, 'blog/base.html', {"posts":posts, "categories":categories})
+    most_recent = Posts.objects.filter(published=True).order_by('-created')[:2]
+    return render(request, 'blog/base.html', {"posts":posts, "categories":categories, "most_recent":most_recent})
 
 def single(request, slug):
     try:
@@ -41,9 +42,16 @@ def single(request, slug):
     post = Posts.objects.get(slug=slug)
     tags = PostTags.objects.filter(post=post.pk)
     categories = Category.objects.filter(featured=True)
-
+    try:
+        prev = Posts.objects.get(id=post.prev)
+    except:
+        prev = None
+    try:
+        nxt = Posts.objects.get(id=post.nxt)
+    except:
+        nxt = None
     return render(request, 'blog/post.html', {"post":post, "tags":tags, 'base_url':settings.BASE_URL,
-        "categories":categories})
+        "categories":categories, "prev":prev, "nxt":nxt})
 
 
 def category_wise_posts(request, slug):

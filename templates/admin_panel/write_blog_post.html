@@ -57,6 +57,28 @@
                    <input type="file" name="thumbnail" class="dropify post-thumbnail" data-default-file=""  />
                    <span class="error-msg post-thumbnail-error"></span>
                 </div>
+              <div class="form-group">
+                  <label>Previous Post</label>
+                  <select name="prev" class="form-control" style="height: auto; padding: 10px;" />
+                  <option selected="selected" disabled="disabled">Select a post</option>
+                  {% for post in posts %}
+                    <option value="{{ post.id }}">{{ post.title }}</option>
+                  {% endfor %}
+                  </select>
+                    <span class="error-msg slug-error"></span>
+                    <span class="slug-exists"></span>
+              </div>
+              <div class="form-group">
+                  <label>Next Post</label>
+                  <select name="nxt" class="form-control" style="height: auto; padding: 10px;" />
+                  <option selected="selected" disabled="disabled">Select a post</option>
+                  {% for post in posts %}
+                    <option value="{{ post.id }}">{{ post.title }}</option>
+                  {% endfor %}
+                  </select>
+                    <span class="error-msg slug-error"></span>
+                    <span class="slug-exists"></span>
+              </div>
             </div>
           </div>
           <!-- <div class="card card-outline card-info"> -->

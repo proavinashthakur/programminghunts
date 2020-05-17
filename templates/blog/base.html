@@ -35,34 +35,35 @@
             ================================================== -->
 			<section class="featured-posts">
 			<div class="section-title">
-				<h2><span>Featured</span></h2>
+				<h2><span>Most Recent Stories</span></h2>
 			</div>
 			<div class="row listfeaturedtag">
 				<!-- begin post -->
-				<div class="col-sm-6">
-					<div class="card">
-						<div class="row">
-							<div class="col-md-5 wrapthumbnail">
-								<a href="/single">
-								<div class="thumbnail" style="background-image:url({% static 'images/1.jpg' %});">
+				{% for recent in most_recent %}
+					<div class="col-sm-6">
+						<div class="card">
+							<div class="row">
+								<div class="col-md-5 wrapthumbnail">
+									<a href="/tutorial/{{ recent.slug }}">
+									<div class="thumbnail" style="background-image:url('/media/{{recent.thumbnail}}');">
+									</div>
+									</a>
 								</div>
-								</a>
-							</div>
-							<div class="col-md-7">
-								<div class="card-block">
-									<h2 class="card-title"><a href="/single">We all wait for summer</a></h2>
-									<h4 class="card-text">This is changed. As I engage in the so-called “bull sessions” around and about the school, I too often find that most college men have...</h4>
-									<div class="metafooter">
-                                        <div class="wrapfooter">
-											<span class="meta-footer-thumb">
-											<img class="author-thumb" src="https://www.gravatar.com/avatar/b1cc14991db7a456fcd761680bbc8f81?s=250&d=mm&r=x" alt="John">
-											</span>
-											<span class="author-meta">
-											<span class="post-name"><a target="_blank" href="#">John</a></span><br/>
-											<span class="post-date">12 Jan 2018</span>
-											</span>
-											<span class="post-read-more"><a href="/single" title="Read Story"><i class="fa fa-link"></i></a></span>
-											<div class="clearfix">
+								<div class="col-md-7">
+									<div class="card-block">
+										<h2 class="card-title"><a href="/tutorial/{{ recent.slug }}">{{ recent.title }}</a></h2>
+										<h4 class="card-text">{{ recent.meta_desc }}</h4>
+										<div class="metafooter">
+	                                        <div class="wrapfooter">
+												<span class="meta-footer-thumb">
+												<span class="author-meta">
+												<!-- <span class="post-name"><a target="_blank" href="#">Sal</a></span><br/> -->
+													<span class="post-date"><a href="/tutorial/{{ recent.slug }}">READ MORE</a>
+													</span>
+												</span>
+												<span class="post-read-more"><a href="/tutorial/{{ recent.slug }}" title="Read Story"><i class="fa fa-eye" aria-hidden="true"></i></a></span>
+												<div class="clearfix">
+												</div>
 											</div>
 										</div>
 									</div>
@@ -70,41 +71,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				<!-- end post -->
-				<!-- begin post -->
-				<div class="col-sm-6">
-					<div class="card">
-						<div class="row">
-							<div class="col-md-5 wrapthumbnail">
-								<a href="single.html">
-								<div class="thumbnail" style="background-image:url({% static 'images/4.jpg' %});">
-								</div>
-								</a>
-							</div>
-							<div class="col-md-7">
-								<div class="card-block">
-									<h2 class="card-title"><a href="single.html">Powerful things you can do with the Markdown editor</a></h2>
-									<h4 class="card-text">There are lots of powerful things you can do with the Markdown editor </h4>
-									<div class="metafooter">
-										<div class="wrapfooter">
-											<span class="meta-footer-thumb">
-											<img class="author-thumb" src="https://www.gravatar.com/avatar/e56154546cf4be74e393c62d1ae9f9d4?s=250&d=mm&r=x" alt="Sal">
-											</span>
-											<span class="author-meta">
-											<span class="post-name"><a target="_blank" href="#">Sal</a></span><br/>
-											<span class="post-date">12 Jan 2018</span>
-											</span>
-											<span class="post-read-more"><a href="single.html" title="Read Story"><i class="fa fa-link"></i></a></span>
-											<div class="clearfix">
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				{% endfor %}
 				<!-- end post -->
 			</div>
 			</section>
@@ -116,7 +83,7 @@
 			{% include 'blog/sidebar.html' %}
 			<div class="col-sm-8">
 				<div class="section-title">
-					<h2><span>All Stories</span></h2>
+					<h2><span>Recently Updated</span></h2>
 				</div>
 				<div class="masonrygrid row listrecent">
 					<!-- begin post -->
@@ -138,7 +105,8 @@
 
 										<span class="author-meta">
 										<!-- <span class="post-name"><a target="_blank" href="#">Sal</a></span><br/> -->
-										<span class="post-date">Last Updated <strong>{{ post.updated|date:"M d, Y" }}</strong></span>
+											<span class="post-date">Last Updated <strong>{{ post.updated|date:"M d, Y" }}</strong>
+											</span>
 										</span>
 										<span class="post-read-more"><a href="/tutorial/{{ post.slug }}" title="Read Story"><i class="fa fa-eye" aria-hidden="true"></i></a></span>
 										<div class="clearfix">
@@ -166,27 +134,7 @@
 	<!-- /.container -->
 	<!-- Before Footer
     ================================================== -->
-	<div class="beforefooter">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-md-8">
-					<h3>This is your final call to action area. Shine like a star, make them want you, tell 'em to push that button!</h3>
-					<p>
-						 We offer a <span>30 Day Money Back Guarantee</span>, so joining is Risk-Free!
-					</p>
-					<a class="btn btn-primary btn-lg" href="#">Join us yesterday</a>
-				</div>
-				<div class="col-md-4 text-right footersocial">
-					<h5>Connect with Us</h5>
-					<i class="fa fa-facebook"></i>
-					<i class="fa fa-twitter"></i>
-					<i class="fa fa-google"></i>
-					<i class="fa fa-pinterest"></i>
-					<i class="fa fa-github"></i>
-				</div>
-			</div>
-		</div>
-	</div>
+		{% include 'blog/beforefooter.html' %}
 	<!-- Begin Footer
     ================================================== -->
 	<footer class="footer">

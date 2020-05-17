@@ -109,7 +109,8 @@ def write_blog_post(request):
     # total_shipments = Shipments.objects.count()
     # customers = Shipments.objects.values('email').distinct().count()
     form = PostForm()
-    return render(request, 'admin_panel/write_blog_post.html', {"form":form})
+    posts = Posts.objects.all()
+    return render(request, 'admin_panel/write_blog_post.html', {"form":form, "posts":posts})
 
 # index/dashboard page when user is logged in
 @login_required(login_url="/pro/login")
@@ -260,8 +261,10 @@ def add_post(request):
     meta_keywords = data.get("meta-keywords")
     thumbnail = request.FILES.get('thumbnail')
     blog_post = data.get("content")
+    prev = data.get("prev")
+    nxt = data.get("nxt")
     post = Posts.objects.create(title=title, slug=slug, meta_desc=meta_desc, 
-        meta_keywords=meta_keywords, thumbnail=thumbnail, post=blog_post)
+        meta_keywords=meta_keywords, thumbnail=thumbnail, post=blog_post, prev=prev, nxt=nxt)
     tags = data.getlist("tags[]")
     for item in tags:
         tag = Tags.objects.get(id=item)
@@ -305,13 +308,22 @@ def get_post_data(request, id):
     post = Posts.objects.get(id=id)
     tags = PostTags.objects.filter(post=post.pk)
     tag_list = PostTags.objects.filter(post=id).values_list('tag_id', flat=True)
-    print(tag_list)
+    try:
+        prev = Posts.objects.get(id=post.prev)
+    except:
+        prev = None
+    try:
+        nxt = Posts.objects.get(id=post.nxt)
+    except:
+        nxt = None
     if request.method =="POST":
         data = request.POST
         post.title = data.get("title")
         post.slug = data.get("slug")
         post.meta_desc = data.get("meta-desc")
         post.meta_keywords = data.get("meta-keywords")
+        post.prev = data.get("prev")
+        post.nxt = data.get("nxt")
         if request.FILES.get('thumbnail'):
             post.thumbnail = request.FILES.get('thumbnail')
         post.post = data.get("content")
@@ -344,7 +356,9 @@ def get_post_data(request, id):
         messages.success(request, "Post saved")
         return redirect("all-posts")
     form = PostForm(initial={'content': post.post})
-    return render(request, 'admin_panel/update_post.html', {"form":form, "post":post, "tags":tags, "base_url":settings.BASE_URL})
+    posts_data = Posts.objects.all()
+    return render(request, 'admin_panel/update_post.html', {"form":form, "post":post, "tags":tags, "prev":prev, "nxt":nxt, 
+        "base_url":settings.BASE_URL, "posts_data":posts_data})
 
 
 @login_required(login_url="/pro/login")
