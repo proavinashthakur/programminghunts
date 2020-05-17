@@ -33,7 +33,7 @@ class Posts(models.Model):
 	published = models.BooleanField(default=False) 
 
 	def get_absolute_url(self):
-		return '/'+self.slug
+		return '/tutorial/'+self.slug
 
 
 class PostTags(models.Model):
