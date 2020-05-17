@@ -45,9 +45,6 @@
     <!-- form Uploads -->
     <link href="{% static 'css/dropify.min.css' %}" rel="stylesheet" type="text/css" />
     <!-- <link  rel="stylesheet" href="{% static 'css/foundation.min.css' %}">  -->
-        <!-- jQuery -->
-    <script src="{% static 'plugins/jquery/jquery.min.js' %}">
-    </script>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -260,7 +257,9 @@
     </div>
     <!-- ./wrapper -->
 
-
+    <!-- jQuery -->
+    <script src="{% static 'plugins/jquery/jquery.min.js' %}">
+    </script>
     <!-- jQuery UI 1.11.4 -->
     <script src="{% static 'plugins/jquery-ui/jquery-ui.min.js' %}"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -626,12 +625,12 @@ $("input[data-bootstrap-switch]").each(function(){
 
       {% endfor %}
     {% endif %}
-    <script src="{% static "highlight.pack.js" %}"></script>          {# required for syntax hightlighting #}
-    <script>hljs.initHighlightingOnLoad();</script>                   {# required for syntax hightlighting #}
+    <!-- <script src="{% static "highlight.pack.js" %}"></script>          {# required for syntax hightlighting #} -->
+    <!-- <script>hljs.initHighlightingOnLoad();</script>                   {# required for syntax hightlighting #} -->
 
-    <script  src="{% static 'js/vendor/jquery.js' %}"></script>       {# addition javascripts  #}
-    <script  src="{% static 'js/vedor/what-input.js' %}"></script>
-    <script  src="{% static 'js/foundation.min.js'%}"></script>
+    <!-- <script  src="{% static 'js/vendor/jquery.js' %}"></script>       {# addition javascripts  #} -->
+    <!-- <script  src="{% static 'js/vedor/what-input.js' %}"></script> -->
+    <!-- <script  src="{% static 'js/foundation.min.js'%}"></script> -->
 
 </body>
 
