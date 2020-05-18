@@ -14,3 +14,11 @@ class PostForm(forms.Form):
     # class Meta:
     #     model = Posts
     #     fields = '__all__'
+
+class PrivacyPolicyForm(forms.Form):
+    content = forms.CharField(
+        widget=TinyMCE(attrs={
+            'required': False,
+            'cols': 30,
+            'rows': 10
+        }))

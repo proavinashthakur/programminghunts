@@ -23,58 +23,14 @@
     ================================================== -->
 	<section class="intro">
 	<div class="wrapintro">
-		<h1>PROGRAMMING HUNTS<br />
-		<span class="blue">stories about technologies</span></h1>
+		<h1><font color="red">Oops, Error!</font><br />
+		<span class="blue">Something went wrong.</span></h1>
 	</div>
 	</section>
 	<!-- Container
     ================================================== -->
 	<div class="container">
 		<div class="main-content">
-			<!-- Featured
-            ================================================== -->
-			<section class="featured-posts">
-			<div class="section-title">
-				<h2><span>Most Recent Stories</span></h2>
-			</div>
-			<div class="row listfeaturedtag">
-				<!-- begin post -->
-				{% for recent in most_recent %}
-					<div class="col-sm-6">
-						<div class="card">
-							<div class="row">
-								<div class="col-md-5 wrapthumbnail">
-									<a href="/tutorial/{{ recent.slug }}">
-									<div class="thumbnail" style="background-image:url('/media/{{recent.thumbnail}}');">
-									</div>
-									</a>
-								</div>
-								<div class="col-md-7">
-									<div class="card-block">
-										<h2 class="card-title"><a href="/tutorial/{{ recent.slug }}">{{ recent.title }}</a></h2>
-										<h4 class="card-text">{{ recent.meta_desc }}</h4>
-										<div class="metafooter">
-	                                        <div class="wrapfooter">
-												<span class="meta-footer-thumb">
-												<span class="author-meta">
-												<!-- <span class="post-name"><a target="_blank" href="#">Sal</a></span><br/> -->
-													<span class="post-date"><a href="/tutorial/{{ recent.slug }}">READ MORE</a>
-													</span>
-												</span>
-												<span class="post-read-more"><a href="/tutorial/{{ recent.slug }}" title="Read Story"><i class="fa fa-eye" aria-hidden="true"></i></a></span>
-												<div class="clearfix">
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				{% endfor %}
-				<!-- end post -->
-			</div>
-			</section>
 			<!-- Posts Index
         ================================================== -->
 			<section class="recent-posts row">

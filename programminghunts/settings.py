@@ -83,37 +83,37 @@ WSGI_APPLICATION = 'programminghunts.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-# # local database 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'prohunts',
-#         'USER': 'pro_user',
-#         'PASSWORD': 'pro_pass',
-#         'HOST': 'localhost',
-#         'PORT': '3306',
-#     }
-# }
-
-# # BASE url of site for local
-# BASE_URL = "http://192.168.43.12:8000"
-
-
-# live database 
-
+# local database 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'prohunts',
-        'USER': 'pro_user001',
-        'PASSWORD': 'pro_user_pass_m3r4k44m4v1',
+        'USER': 'pro_user',
+        'PASSWORD': 'pro_pass',
         'HOST': 'localhost',
         'PORT': '3306',
     }
 }
 
+# BASE url of site for local
+BASE_URL = "http://192.168.43.12:8000"
+
+
+# live database 
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'prohunts',
+#         'USER': 'pro_user001',
+#         'PASSWORD': 'pro_user_pass_m3r4k44m4v1',
+#         'HOST': 'localhost',
+#         'PORT': '3306',
+#     }
+# }
+
 # BASE url of site for production
-BASE_URL = "http://programminghunts.com"
+# BASE_URL = "http://programminghunts.com"
 
 
 
@@ -181,7 +181,6 @@ EMAIL_HOST_USER = 'programminghunts@gmail.com'
 EMAIL_HOST_PASSWORD = '@chupkravi'
 
 GEOIP_PATH =os.path.join('geoip')
-
 
 TINYMCE_DEFAULT_CONFIG = {
     'height':

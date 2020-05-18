@@ -5,14 +5,14 @@ from django.contrib.auth.decorators import login_required
 from admin_panel.models import User
 from django.contrib import messages
 from django.contrib.auth.hashers import check_password
-from blog.models import Category, Tags, Posts, PostTags
+from blog.models import Category, Tags, Posts, PostTags, PrivacyPolicy
 from django.contrib.sites.models import Site
 from .serializers import CategorySerializer, TagSerializer, PostTagSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.conf import settings
 from django.http import JsonResponse
-from blog.forms import PostForm
+from blog.forms import PostForm, PrivacyPolicyForm
 def signin(request):
     if request.method == "POST":
         username = request.POST.get('username')
@@ -411,3 +411,32 @@ def change_featured_category_status(request, id):
         return JsonResponse({"status":True, "data":Category.objects.get(id=id).featured})
     except:
         return JsonResponse({"status":False, "data":Category.objects.get(id=id).featured})
+
+# index/dashboard page when user is logged in
+@login_required(login_url="/pro/login")
+def write_privacy_policy(request):
+    update = False
+    try:
+        initial_data = PrivacyPolicy.objects.all()[0].post
+        update = True
+        form = PrivacyPolicyForm(initial={'content': initial_data})
+    except:
+        form = PrivacyPolicyForm()
+    if request.method == "POST":
+        post = PrivacyPolicy.objects.create(post = request.POST.get('content', None))
+        messages.success(request, "PrivacyPolicy created")
+        return redirect("write-privacy-policy")
+    return render(request, 'admin_panel/write_privacy_policy.html', {"form":form, "update":update})
+
+
+
+@login_required(login_url="/pro/login")
+def update_privacy_policy(request):
+    if request.method == "POST":
+        post_obj = PrivacyPolicy.objects.all()[0]
+        post_obj.post = request.POST.get('content', None)
+        post_obj.save()
+        messages.success(request, "PrivacyPolicy Updated")
+        return redirect("write-privacy-policy")
+    else:
+        return redirect("/pro")

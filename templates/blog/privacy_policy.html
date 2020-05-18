@@ -1,0 +1,35 @@
+{% extends 'blog/single-base.html' %}
+{% load static %}
+{% block content %}
+	<!-- Post -->
+	<div class="col-sm-8 scroll-till">
+		<div class="mainheading">
+			<!-- Post Categories -->
+			<div class="after-post-tags">
+				<ul class="tags">
+					{% for tag in tags %}
+					<li>
+					<a href="#">{{ tag.tag.title }}</a>
+					</li>
+					{% endfor %}
+				</ul>
+			</div>
+			<!-- End Categories -->
+			<!-- Post Title -->
+		<h1 class="posttitle">Privacy Policy</h1>
+		</div>                    
+		<!-- Post Content -->
+		<div class="article-post">
+			{{ post.post | safe }}
+			<div class="clearfix">
+			</div>
+		</div>
+		<!-- Post Date -->
+		<p>
+			<small>Last Updated: 
+			<span class="post-date"><time class="post-date" datetime="{{ post.updated |date:'d-m-Y'}}">{{ post.updated |date:'d-m-Y'}}</time></span>
+			</small>
+		</p>
+      	</div>
+	<!-- End Post -->
+{% endblock %}

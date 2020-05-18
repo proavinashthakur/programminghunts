@@ -42,3 +42,6 @@ class PostTags(models.Model):
 	tag = models.ForeignKey(Tags, on_delete=models.CASCADE, default=None, null=True, related_name="tag")
 	post = models.ForeignKey(Posts, on_delete=models.CASCADE, default=None, null=True)
 
+class PrivacyPolicy(models.Model):
+	post = HTMLField('Content')
+	updated = models.DateTimeField(auto_now = True)

@@ -26,4 +26,6 @@ urlpatterns = [
     path('get-post-tags/<int:post_id>', views.get_post_tags, name="get-post-tags"),
     path('change-featured-status/<int:id>', views.change_featured_category_status,
         name="change-featured-category-status"),
+    path('write-privacy-policy', views.write_privacy_policy, name="write-privacy-policy"),
+    path('update-privacy-policy', views.update_privacy_policy, name="update-privacy-policy"),
 ]

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from . models import Category, Tags, Posts, PostTags
+from . models import Category, Tags, Posts, PostTags, PrivacyPolicy
 from django.conf import settings
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -78,14 +78,22 @@ def category_wise_posts(request, slug):
     return render(request, 'blog/category_wise.html', {"posts":posts, "categories":categories,
         "title":title})
 
+def privacy_policy(request):
+    post = PrivacyPolicy.objects.all()[0]
+    return render(request, 'blog/privacy_policy.html', {"post":post})  
+
 
 def handler404(request, *args, **argv):
-    response = render(request, '404.html', {})
-    response.status_code = 404
+    posts = Posts.objects.filter(published=True).order_by('-updated')[:4]
+    categories = Category.objects.filter(featured=True)
+    response = render(request, 'blog/error.html', {"posts":posts, "categories":categories})                    
+    response.status_code = 500
     return response
 
 
 def handler500(request, *args, **argv):
-    response = render(request, '500.html', {})                    
+    posts = Posts.objects.filter(published=True).order_by('-updated')[:4]
+    categories = Category.objects.filter(featured=True)
+    response = render(request, 'blog/error.html', {"posts":posts, "categories":categories})                    
     response.status_code = 500
     return response

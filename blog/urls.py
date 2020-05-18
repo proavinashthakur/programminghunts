@@ -11,5 +11,6 @@ urlpatterns = [
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='sitemap'),
 	path('', views.index, name="index"),
 	path('tutorial/<str:slug>', views.single, name="single-post"),
-	path('category/<str:slug>', views.category_wise_posts, name="category-wise")
+	path('category/<str:slug>', views.category_wise_posts, name="category-wise"),
+	path('privacy-policy', views.privacy_policy, name="privacy-policy"),
 ]
