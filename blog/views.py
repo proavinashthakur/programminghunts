@@ -81,7 +81,8 @@ def category_wise_posts(request, slug):
 def privacy_policy(request):
     post = PrivacyPolicy.objects.all().annotate(title=Value('Privacy Policy - ProgrammingHunts', output_field=CharField()))[0]
     # post.annotate("title"="PrivacyPolicy")
-    return render(request, 'blog/privacy_policy.html', {"post":post})  
+    categories = Category.objects.filter(featured=True)
+    return render(request, 'blog/privacy_policy.html', {"post":post, "categories":categories})  
 
 
 def handler404(request, *args, **argv):
