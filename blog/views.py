@@ -6,7 +6,7 @@ from rest_framework.response import Response
 
 from django.contrib.gis.geoip2 import GeoIP2
 from subscriber.models import Visitor
-
+from django.db.models import CharField, Value
 
 def index(request):
     try:
@@ -79,7 +79,8 @@ def category_wise_posts(request, slug):
         "title":title})
 
 def privacy_policy(request):
-    post = PrivacyPolicy.objects.all()[0]
+    post = PrivacyPolicy.objects.all().annotate(title=Value('Privacy Policy - ProgrammingHunts', output_field=CharField()))[0]
+    # post.annotate("title"="PrivacyPolicy")
     return render(request, 'blog/privacy_policy.html', {"post":post})  
 
 
