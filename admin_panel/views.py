@@ -13,6 +13,8 @@ from rest_framework.response import Response
 from django.conf import settings
 from django.http import JsonResponse
 from blog.forms import PostForm, PrivacyPolicyForm
+
+
 def signin(request):
     if request.method == "POST":
         username = request.POST.get('username')
