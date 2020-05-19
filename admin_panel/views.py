@@ -324,8 +324,10 @@ def get_post_data(request, id):
         post.slug = data.get("slug")
         post.meta_desc = data.get("meta-desc")
         post.meta_keywords = data.get("meta-keywords")
-        post.prev = data.get("prev")
-        post.nxt = data.get("nxt")
+        if data.get("prev") != '':
+            post.prev = data.get("prev")
+        if data.get("nxt") != '':
+            post.nxt = data.get("nxt")
         if request.FILES.get('thumbnail'):
             post.thumbnail = request.FILES.get('thumbnail')
         post.post = data.get("content")
