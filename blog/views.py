@@ -8,6 +8,7 @@ from django.contrib.gis.geoip2 import GeoIP2
 from subscriber.models import Visitor
 from django.db.models import CharField, Value
 
+
 def index(request):
     try:
         g = GeoIP2()
@@ -39,7 +40,11 @@ def single(request, slug):
         Visitor.objects.create(ip=ip, city=city['city'], country=city['country_name'], url=request.path)
     except:
         pass
-    post = Posts.objects.get(slug=slug)
+    if request.user.is_authenticated:
+        post = Posts.objects.get(slug=slug)
+    else:
+        post = Posts.objects.get(slug=slug, published=True)
+    
     tags = PostTags.objects.filter(post=post.pk)
     categories = Category.objects.filter(featured=True)
     try:

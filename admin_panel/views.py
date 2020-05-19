@@ -90,6 +90,7 @@ def change_password(request):
 from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.sitemaps import ping_google
 
 
 # index/dashboard page when user is logged in
@@ -300,6 +301,10 @@ def change_publish_status(request, id):
         elif status == False:
             post.published = True
         post.save()
+        try:
+            ping = ping_google()
+        except:
+            pass
         return JsonResponse({"status":True, "data":Posts.objects.get(id=id).published})
     except:
         return JsonResponse({"status":False, "data":Posts.objects.get(id=id).published})
