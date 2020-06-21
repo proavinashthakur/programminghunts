@@ -9,7 +9,9 @@
 				<ul class="tags">
 					{% for tag in tags %}
 					<li>
-					<a href="#">{{ tag.tag.title }}</a>
+						<h2 style="font-size: 18px;">
+							<a href="#">{{ tag.tag.title }}</a>
+						</h2>
 					</li>
 					{% endfor %}
 				</ul>
@@ -50,6 +52,7 @@
 				{% endif %}			
 			</div>
 		</div>
+		{% include 'blog/comments.html' %}
       	</div>
 	<!-- End Post -->
 {% endblock %}

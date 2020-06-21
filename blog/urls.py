@@ -7,8 +7,9 @@ sitemaps = {
     'posts': PostSitemap
 }
 
-urlpatterns = [
-    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='sitemap'),
+urlpatterns = [	
+	path('location', views.location, name="location"),	
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemaps``		sty7mnnn  '),
 	path('', views.index, name="index"),
 	path('tutorial/<str:slug>', views.single, name="single-post"),
 	path('category/<str:slug>', views.category_wise_posts, name="category-wise"),

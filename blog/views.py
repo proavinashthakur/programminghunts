@@ -3,43 +3,20 @@ from . models import Category, Tags, Posts, PostTags, PrivacyPolicy
 from django.conf import settings
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-
-from django.contrib.gis.geoip2 import GeoIP2
 from subscriber.models import Visitor
 from django.db.models import CharField, Value
 
 
+def location(request):
+    return render(request, 'blog/location.html')
+
 def index(request):
-    try:
-        g = GeoIP2()
-        ip = request.META.get('REMOTE_ADDR', None)
-        if ip:
-            city = g.city(ip)
-        g = GeoIP2()
-        ip = request.META.get('REMOTE_ADDR', None)
-        if ip:
-            city = g.city(ip)
-        Visitor.objects.create(ip=ip, city=city['city'], country=city['country_name'], url=request.path)
-    except:
-        pass
     posts = Posts.objects.filter(published=True).order_by('-updated')[:4]
     categories = Category.objects.filter(featured=True)
     most_recent = Posts.objects.filter(published=True).order_by('-created')[:2]
     return render(request, 'blog/base.html', {"posts":posts, "categories":categories, "most_recent":most_recent})
 
 def single(request, slug):
-    try:
-        g = GeoIP2()
-        ip = request.META.get('REMOTE_ADDR', None)
-        if ip:
-            city = g.city(ip)
-        g = GeoIP2()
-        ip = request.META.get('REMOTE_ADDR', None)
-        if ip:
-            city = g.city(ip)
-        Visitor.objects.create(ip=ip, city=city['city'], country=city['country_name'], url=request.path)
-    except:
-        pass
     if request.user.is_authenticated:
         post = Posts.objects.get(slug=slug)
     else:
@@ -60,18 +37,6 @@ def single(request, slug):
 
 
 def category_wise_posts(request, slug):
-    try:
-        g = GeoIP2()
-        ip = request.META.get('REMOTE_ADDR', None)
-        if ip:
-            city = g.city(ip)
-        g = GeoIP2()
-        ip = request.META.get('REMOTE_ADDR', None)
-        if ip:
-            city = g.city(ip)
-        Visitor.objects.create(ip=ip, city=city['city'], country=city['country_name'], url=request.path)
-    except:
-        pass
     category = Category.objects.filter(slug=slug)[0]
     category_id = category.id
     title = category.title

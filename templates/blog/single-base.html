@@ -13,10 +13,6 @@
 <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i" rel="stylesheet">
 <link href="{% static 'css/theme.css' %}" rel="stylesheet">
 <meta property="og:image" content="/media/{{ post.thumbnail }}" />
-<!-- Begin tracking codes here, including ShareThis/Analytics -->
-    
-<!-- End tracking codes here, including ShareThis/Analytics -->
-
 <!—- ShareThis BEGIN -—>
 <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5e96992ea034e50012b52e5c&product=sticky-share-buttons&cms=sop' async='async'></script>
 <!—- ShareThis END -—>
@@ -42,7 +38,7 @@
 			<!-- Begin Article
             ================================================== -->
 			<div class="row">
-				{% include 'blog/sidebar.html' %}
+				
 				{% block content %}
 
 				{% endblock %}

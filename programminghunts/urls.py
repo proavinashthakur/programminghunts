@@ -23,7 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),
     path('pro/', include('admin_panel.urls')),
-    path('', include('subscriber.urls')),
     re_path(r'^admin/filebrowser/', site.urls),
     re_path(r'^tinymce/', include('tinymce.urls')),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

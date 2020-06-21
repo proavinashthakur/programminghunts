@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '#4_83uqa)#4fs@6%y#hm2247iw*#rn=wema+6-@j-9$ec7ks^%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -41,10 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.sitemaps',
     'rest_framework',
-    'geoip2',
     'blog',
     'admin_panel',
-    'subscriber',
     'tinymce',
 ]
 
@@ -84,36 +82,36 @@ WSGI_APPLICATION = 'programminghunts.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 # local database 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'prohunts',
-#         'USER': 'pro_user',
-#         'PASSWORD': 'pro_pass',
-#         'HOST': 'localhost',
-#         'PORT': '3306',
-#     }
-# }
-
-# BASE url of site for local
-# BASE_URL = "http://192.168.43.12:8000"
-
-
-# live database 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'prohunts',
-        'USER': 'pro_user001',
-        'PASSWORD': 'pro_user_pass_m3r4k44m4v1',
+        'USER': 'pro_user',
+        'PASSWORD': 'pro_pass',
         'HOST': 'localhost',
         'PORT': '3306',
     }
 }
 
+# BASE url of site for local
+BASE_URL = "http://127.0.0.1:8000"
+
+
+# live database 
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'prohunts',
+#         'USER': 'pro_user001',
+#         'PASSWORD': 'pro_user_pass_m3r4k44m4v1',
+#         'HOST': 'localhost',
+#         'PORT': '3306',
+#     }
+# }
+
 # BASE url of site for production
-BASE_URL = "http://programminghunts.com"
+# BASE_URL = "http://programminghunts.com"
 
 
 
