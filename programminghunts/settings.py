@@ -82,36 +82,36 @@ WSGI_APPLICATION = 'programminghunts.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 # local database 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'prohunts',
-        'USER': 'pro_user',
-        'PASSWORD': 'pro_pass',
-        'HOST': 'localhost',
-        'PORT': '3306',
-    }
-}
-
-# BASE url of site for local
-BASE_URL = "http://127.0.0.1:8000"
-
-
-# live database 
-
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
 #         'NAME': 'prohunts',
-#         'USER': 'pro_user001',
-#         'PASSWORD': 'pro_user_pass_m3r4k44m4v1',
+#         'USER': 'pro_user',
+#         'PASSWORD': 'pro_pass',
 #         'HOST': 'localhost',
 #         'PORT': '3306',
 #     }
 # }
 
+
+# live database 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'prohunts',
+        'USER': 'root',
+        'PASSWORD': 'r00t',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
+}
+
+
+# BASE url of site for local
+# BASE_URL = "http://127.0.0.1:8000"
+
 # BASE url of site for production
-# BASE_URL = "http://programminghunts.com"
+BASE_URL = "http://programminghunts.com"
 
 
 
@@ -169,16 +169,6 @@ MEDIA_URL = '/media/'
 
 # Path where media is stored
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-
-# Email  SMTP info
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'programminghunts@gmail.com'
-EMAIL_HOST_PASSWORD = '@chupkravi'
-
-GEOIP_PATH =os.path.join('geoip')
 
 TINYMCE_DEFAULT_CONFIG = {
     'height':

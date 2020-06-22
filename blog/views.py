@@ -6,9 +6,6 @@ from rest_framework.response import Response
 from django.db.models import CharField, Value
 
 
-def location(request):
-    return render(request, 'blog/location.html')
-
 def index(request):
     posts = Posts.objects.filter(published=True).order_by('-updated')[:4]
     categories = Category.objects.filter(featured=True)
