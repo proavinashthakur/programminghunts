@@ -57,7 +57,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'programminghunts.urls'
-SITE_ID = 2
+SITE_ID = 2 
 
 TEMPLATES = [
     {
@@ -111,7 +111,7 @@ DATABASES = {
 # BASE_URL = "http://127.0.0.1:8000"
 
 # BASE url of site for production
-BASE_URL = "http://programminghunts.com"
+BASE_URL = "https://programminghunts.com"
 
 
 
