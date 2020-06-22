@@ -3,7 +3,6 @@ from . models import Category, Tags, Posts, PostTags, PrivacyPolicy
 from django.conf import settings
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from subscriber.models import Visitor
 from django.db.models import CharField, Value
 
 
